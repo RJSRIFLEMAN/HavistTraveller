@@ -1,0 +1,160 @@
+import { defineField, defineType } from "sanity";
+
+export const travelPackage = defineType({
+  name: "travelPackage",
+  title: "Travel packages",
+  type: "document",
+  groups: [
+    { name: "overview", title: "Overview", default: true },
+    { name: "itinerary", title: "Itinerary" },
+    { name: "details", title: "Details" },
+  ],
+  fields: [
+    defineField({
+      name: "title",
+      title: "Package title",
+      type: "string",
+      group: "overview",
+      validation: (rule) => rule.required().max(100),
+    }),
+    defineField({
+      name: "slug",
+      title: "URL slug",
+      type: "slug",
+      group: "overview",
+      options: { source: "title", maxLength: 96 },
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "destination",
+      title: "Destination",
+      type: "string",
+      group: "overview",
+      validation: (rule) => rule.required().max(80),
+    }),
+    defineField({
+      name: "category",
+      title: "Category",
+      type: "string",
+      group: "overview",
+      options: {
+        list: [
+          { title: "Education", value: "EDUCATION" },
+          { title: "Recreation", value: "RECREATION" },
+          { title: "Graduation", value: "GRADUATION" },
+        ],
+        layout: "radio",
+      },
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "excerpt",
+      title: "Short description",
+      type: "text",
+      rows: 3,
+      group: "overview",
+      validation: (rule) => rule.required().max(220),
+    }),
+    defineField({
+      name: "coverImage",
+      title: "Cover image",
+      type: "image",
+      group: "overview",
+      options: { hotspot: true },
+      fields: [
+        defineField({
+          name: "alt",
+          title: "Alternative text",
+          type: "string",
+          validation: (rule) => rule.required(),
+        }),
+      ],
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "startPrice",
+      title: "Discounted starting price (IDR)",
+      type: "number",
+      group: "overview",
+      validation: (rule) => rule.required().integer().min(1),
+    }),
+    defineField({
+      name: "originalPrice",
+      title: "Original price (IDR, optional)",
+      type: "number",
+      group: "overview",
+      validation: (rule) => rule.integer().min(1),
+    }),
+    defineField({
+      name: "durationDays",
+      title: "Duration (days)",
+      type: "number",
+      group: "overview",
+      validation: (rule) => rule.required().integer().min(1).max(60),
+    }),
+    defineField({
+      name: "itinerary",
+      title: "Itinerary",
+      type: "array",
+      group: "itinerary",
+      of: [
+        {
+          type: "object",
+          name: "itineraryDay",
+          fields: [
+            defineField({
+              name: "day",
+              title: "Day number",
+              type: "number",
+              validation: (rule) => rule.required().integer().min(1),
+            }),
+            defineField({
+              name: "title",
+              title: "Day title",
+              type: "string",
+              validation: (rule) => rule.required().max(100),
+            }),
+            defineField({
+              name: "activities",
+              title: "Activities",
+              type: "array",
+              of: [{ type: "string" }],
+              validation: (rule) => rule.required().min(1),
+            }),
+          ],
+          preview: {
+            select: { title: "title", day: "day" },
+            prepare: ({ title, day }) => ({ title: `Day ${day}: ${title}` }),
+          },
+        },
+      ],
+      validation: (rule) => rule.required().min(1),
+    }),
+    defineField({
+      name: "facilities",
+      title: "Facilities & inclusions",
+      type: "array",
+      group: "details",
+      of: [{ type: "string" }],
+      validation: (rule) => rule.required().min(1),
+    }),
+    defineField({
+      name: "sortOrder",
+      title: "Sort order",
+      type: "number",
+      group: "details",
+      initialValue: 100,
+      validation: (rule) => rule.integer().min(0),
+    }),
+    defineField({
+      name: "isActive",
+      title: "Visible on website",
+      type: "boolean",
+      group: "details",
+      initialValue: false,
+    }),
+  ],
+  preview: {
+    select: { title: "title", subtitle: "destination", media: "coverImage" },
+  },
+});

@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ProposalDeliveryStatus {
+  PENDING
+  SENT
+  FAILED
+}
+
+enum InquiryType {
+  EDUCATION
+  RECREATION
+  GRADUATION
+  CORPORATE
+}
+
+enum InquiryStatus {
+  PENDING
+  NOTIFIED
+  NOTIFICATION_FAILED
+}
+
+model Lead {
+  id              String                  @id @default(cuid())
+  email           String
+  consentedAt     DateTime
+  source          String                  @default("website")
+  deliveryStatus  ProposalDeliveryStatus @default(PENDING)
+  proposalSentAt  DateTime?
+  createdAt       DateTime                @default(now())
+
+  @@index([email, createdAt])
+  @@index([deliveryStatus, createdAt])
+}
+
+model Inquiry {
+  id          String        @id @default(cuid())
+  email       String
+  message     String        @db.VarChar(2000)
+  type        InquiryType
+  consentedAt DateTime
+  status      InquiryStatus @default(PENDING)
+  createdAt   DateTime      @default(now())
+
+  @@index([email, createdAt])
+  @@index([status, createdAt])
+}
+
+model LeadRateLimit {
+  key             String   @id
+  requestCount    Int
+  windowStartedAt DateTime
+  updatedAt       DateTime @updatedAt
+
+  @@index([windowStartedAt])
+}
