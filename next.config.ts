@@ -20,6 +20,10 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   turbopack: { root: process.cwd() },
   images: {
+    localPatterns: [
+      { pathname: "/LogoHvist.png", search: "?v=20261025" },
+      { pathname: "/MascootBadak.png", search: "?v=20261025" },
+    ],
     remotePatterns: [
       { protocol: "https", hostname: "cdn.sanity.io" },
       { protocol: "https", hostname: "images.unsplash.com" },

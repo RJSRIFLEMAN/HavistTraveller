@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, useMotionValueEvent, useReducedMotion, useScroll } from "framer-motion";
+import Image from "next/image";
 
 const navigation = [
   { href: "#paket", label: "Paket wisata" },
@@ -26,11 +27,14 @@ export function SiteHeader() {
       transition={{ duration: 0.22, ease: "easeOut" }}
     >
       <a className="wordmark" href="#top" aria-label="Havist Traveller, kembali ke beranda">
-        <span className="wordmark-symbol" aria-hidden="true">h</span>
-        <span className="wordmark-copy">
-          <strong>HAVIST</strong>
-          <small>TRAVELLER</small>
-        </span>
+        <Image
+          className="wordmark-logo"
+          src="/LogoHvist.png?v=20261025"
+          alt=""
+          width={1280}
+          height={853}
+          priority
+        />
       </a>
       <button
         className="menu-toggle"
