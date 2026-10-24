@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { ArrowDown, ArrowUpRight, MapPin, Search } from "lucide-react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
 import type { PackageSearchParams } from "@/lib/package-query";
 
 interface HeroSectionProps {
@@ -23,7 +24,7 @@ export function HeroSection({ destinations, cmsConfigured, onSearch }: HeroSecti
     offset: ["start start", "end start"],
   });
   const backgroundY = useTransform(scrollYProgress, [0, 1], [0, reduceMotion ? 0 : 125]);
-  const busY = useTransform(scrollYProgress, [0, 1], [0, reduceMotion ? 0 : 42]);
+  const mascotY = useTransform(scrollYProgress, [0, 1], [0, reduceMotion ? 0 : 42]);
 
   async function submitSearch(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -44,8 +45,16 @@ export function HeroSection({ destinations, cmsConfigured, onSearch }: HeroSecti
     <section className="hero" id="top" ref={heroRef} aria-labelledby="hero-title">
       <motion.div className="hero-landscape" style={{ y: backgroundY }} aria-hidden="true" />
       <div className="hero-atmosphere" aria-hidden="true" />
-      <motion.div className="hero-bus" style={{ y: busY }} aria-hidden="true">
-        <BusIllustration />
+      <motion.div className="hero-mascot" style={{ y: mascotY }}>
+        <Image
+          className="hero-mascot-image"
+          src="/MascootBadak.png?v=20261025"
+          alt="Maskot badak Havist Traveller membawa koper dan bendera."
+          width={1080}
+          height={1080}
+          sizes="(max-width: 640px) 50vw, (max-width: 900px) 48vw, 40vw"
+          priority
+        />
       </motion.div>
       <div className="hero-content">
         <p className="hero-kicker"><span /> TEMUKAN CARA BARU UNTUK PERGI BERSAMA</p>
@@ -118,56 +127,5 @@ export function HeroSection({ destinations, cmsConfigured, onSearch }: HeroSecti
       </form>
       <span className="hero-bottom-note" aria-hidden="true">JAVA · BALI · NUSANTARA</span>
     </section>
-  );
-}
-
-function BusIllustration() {
-  return (
-    <svg viewBox="0 0 1180 470" role="img" aria-label="Siluet ilustrasi bus wisata premium">
-      <defs>
-        <linearGradient id="bus-glass" x1="0" x2="0.85" y1="0" y2="1">
-          <stop offset="0" stopColor="#a9e3ed" stopOpacity=".9" />
-          <stop offset="1" stopColor="#567f98" stopOpacity=".85" />
-        </linearGradient>
-        <linearGradient id="bus-body" x1="0" x2="0" y1="0" y2="1">
-          <stop offset="0" stopColor="#f7fbfc" />
-          <stop offset=".22" stopColor="#d8e2e5" />
-          <stop offset=".66" stopColor="#244054" />
-          <stop offset=".69" stopColor="#e1ad55" />
-          <stop offset="1" stopColor="#172a3a" />
-        </linearGradient>
-        <filter id="bus-blur">
-          <feGaussianBlur stdDeviation="15" />
-        </filter>
-      </defs>
-      <ellipse cx="594" cy="412" rx="500" ry="31" fill="#040d17" opacity=".64" filter="url(#bus-blur)" />
-      <path
-        d="M123 361V192c0-45 28-82 70-91 196-42 513-52 754-30 71 6 117 62 120 141l7 149c1 19-14 35-33 35H155c-18 0-32-15-32-35Z"
-        fill="url(#bus-body)"
-        stroke="#d8edf0"
-        strokeOpacity=".76"
-        strokeWidth="6"
-      />
-      <path d="M147 192c1-34 20-60 53-68 194-41 498-48 744-29 54 4 85 37 94 88l3 18H147Z" fill="#13283b" />
-      <path d="M167 187c3-25 16-42 41-48 47-10 104-17 162-23v82H167Z" fill="url(#bus-glass)" />
-      <path d="M388 114c81-7 169-11 251-10v94H388Z" fill="url(#bus-glass)" />
-      <path d="M657 105c93 1 187 5 279 14 36 4 61 24 73 59l5 20H657Z" fill="url(#bus-glass)" />
-      <path d="M376 112v88m270-95v96" stroke="#172b3a" strokeWidth="10" />
-      <path d="M147 219h972" stroke="#f6fbfb" strokeOpacity=".6" strokeWidth="3" />
-      <path d="M124 318c228 21 661 26 945 3" fill="none" stroke="#f3bd66" strokeWidth="9" />
-      <path d="M128 333c224 18 659 20 940 0" fill="none" stroke="#0e2332" strokeOpacity=".68" strokeWidth="4" />
-      <path d="M137 286h19m980 0h19" stroke="#e6f2f3" strokeLinecap="round" strokeWidth="9" />
-      <rect x="1037" y="246" width="23" height="54" rx="8" fill="#e85b4d" />
-      <rect x="133" y="256" width="10" height="47" rx="5" fill="#f7bd61" />
-      <path d="M250 267h150m16 0h69m26 0h252" stroke="#d3e2e6" strokeOpacity=".18" strokeWidth="4" />
-      <circle cx="322" cy="354" r="62" fill="#101c29" stroke="#768c98" strokeWidth="7" />
-      <circle cx="322" cy="354" r="35" fill="#bac7cb" />
-      <circle cx="322" cy="354" r="16" fill="#526675" />
-      <circle cx="951" cy="354" r="62" fill="#101c29" stroke="#768c98" strokeWidth="7" />
-      <circle cx="951" cy="354" r="35" fill="#bac7cb" />
-      <circle cx="951" cy="354" r="16" fill="#526675" />
-      <path d="M472 72c97-8 191-9 275-4" fill="none" stroke="#fff" strokeOpacity=".65" strokeWidth="3" />
-      <text x="574" y="276" fill="#eaf3f4" fontFamily="Arial, sans-serif" fontSize="24" fontWeight="700" letterSpacing="8">HAVIST TRAVEL</text>
-    </svg>
   );
 }

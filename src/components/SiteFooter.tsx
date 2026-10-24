@@ -1,5 +1,6 @@
 import { ArrowUpRight, MoveUp } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export function SiteFooter() {
   return (
@@ -15,8 +16,13 @@ export function SiteFooter() {
       <footer className="site-footer">
         <div className="footer-main">
           <a className="wordmark footer-wordmark" href="#top" aria-label="Havist Traveller, kembali ke atas">
-            <span className="wordmark-symbol" aria-hidden="true">h</span>
-            <span className="wordmark-copy"><strong>HAVIST</strong><small>TRAVELLER</small></span>
+            <Image
+              className="wordmark-logo"
+              src="/LogoHvist.png?v=20261025"
+              alt=""
+              width={1280}
+              height={853}
+            />
           </a>
           <p className="footer-tagline">Your Travel Dream Makers.</p>
           <div className="footer-links">

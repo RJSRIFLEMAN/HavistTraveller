@@ -2,7 +2,8 @@
 
 @theme {
   --color-navy: #0f172a;
-  --color-ocean: #0ea5e9;
+  --color-ocean: #00235b;
+  --color-accent-gold: #edb22a;
   --color-cloud: #f8fafc;
   --color-teal: #0f766e;
   --font-sans: "DM Sans", "Segoe UI", sans-serif;
@@ -13,8 +14,9 @@
   color-scheme: light;
   --navy: #0f172a;
   --navy-soft: #26364e;
-  --ocean: #0ea5e9;
-  --ocean-dark: #0277b5;
+  --ocean: #00235b;
+  --ocean-dark: #00235b;
+  --accent-gold: #edb22a;
   --cloud: #f8fafc;
   --paper: #fff;
   --muted: #64748b;
@@ -131,8 +133,8 @@ select:focus-visible,
   height: 6px;
   flex: 0 0 auto;
   border-radius: 50%;
-  background: var(--ocean);
-  box-shadow: 0 0 0 4px rgb(14 165 233 / 12%);
+  background: var(--accent-gold);
+  box-shadow: 0 0 0 4px rgb(237 178 42 / 17%);
 }
 
 .site-header {
@@ -166,43 +168,20 @@ select:focus-visible,
 .wordmark {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
 }
 
-.wordmark-symbol {
-  width: 34px;
-  height: 34px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: var(--navy);
-  color: white;
-  font-family: Georgia, serif;
-  font-size: 25px;
-  font-style: italic;
-  line-height: 1;
+.wordmark-logo {
+  width: 160px;
+  height: 66px;
+  display: block;
+  border-radius: 4px;
+  background: transparent;
+  object-fit: cover;
+  object-position: center 43%;
 }
 
-.wordmark-copy {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  font-family: var(--font-heading);
-  line-height: 1;
-}
-
-.wordmark-copy strong {
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 1.2px;
-}
-
-.wordmark-copy small {
-  margin-top: 3px;
-  color: #687891;
-  font-size: 7px;
-  font-weight: 700;
-  letter-spacing: 2.1px;
+.footer-wordmark .wordmark-logo {
+  background: white;
 }
 
 .site-navigation {
@@ -238,7 +217,7 @@ select:focus-visible,
 }
 
 .header-proposal span {
-  color: #7dd3fc;
+  color: var(--accent-gold);
   font-size: 16px;
 }
 
@@ -295,8 +274,8 @@ select:focus-visible,
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #38bdf8;
-  box-shadow: 0 0 0 5px rgb(56 189 248 / 20%);
+  background: var(--accent-gold);
+  box-shadow: 0 0 0 5px rgb(237 178 42 / 20%);
 }
 
 .hero h1,
@@ -318,9 +297,13 @@ select:focus-visible,
 .directory-heading h2 em,
 .consultation-strip h2 em,
 .lead-copy h2 em {
-  color: #7dd3fc;
+  color: var(--ocean-dark);
   font-family: Georgia, "Times New Roman", serif;
   font-weight: 400;
+}
+
+.hero h1 em {
+  color: var(--accent-gold);
 }
 
 .hero-description {
@@ -344,25 +327,27 @@ select:focus-visible,
 }
 
 .hero-scroll-link:hover {
-  border-color: #7dd3fc;
-  color: #7dd3fc;
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
 }
 
-.hero-bus {
+.hero-mascot {
   position: absolute;
   z-index: 1;
-  right: -3%;
-  bottom: 112px;
-  width: min(77vw, 1080px);
+  right: 3%;
+  bottom: 145px;
+  width: min(38vw, 500px);
+  aspect-ratio: 1;
   pointer-events: none;
   filter: drop-shadow(0 25px 35px rgb(1 10 21 / 45%));
   will-change: transform;
 }
 
-.hero-bus svg {
+.hero-mascot-image {
   width: 100%;
+  height: 100%;
   display: block;
-  overflow: visible;
+  object-fit: cover;
 }
 
 .hero-caption {
@@ -373,7 +358,8 @@ select:focus-visible,
   display: flex;
   align-items: center;
   gap: 13px;
-  color: #e5f2f7;
+  color: white;
+  text-shadow: 0 1px 5px rgb(15 23 42 / 80%);
   font-family: Georgia, serif;
   font-size: 13px;
   line-height: 1.4;
@@ -382,7 +368,7 @@ select:focus-visible,
 .caption-rule {
   width: 37px;
   height: 1px;
-  background: #38bdf8;
+  background: var(--accent-gold);
 }
 
 .hero-side-index {
@@ -670,8 +656,8 @@ select:focus-visible,
 }
 
 .benefit-card:hover {
-  border-color: #7dd3fc;
-  box-shadow: 0 18px 40px -13px rgb(14 165 233 / 29%);
+  border-color: var(--accent-gold);
+  box-shadow: 0 18px 40px -13px rgb(237 178 42 / 29%);
 }
 
 .benefit-card--1,
@@ -1139,7 +1125,7 @@ select:focus-visible,
 }
 
 .fleet-tooltip > span {
-  color: #bae6fd;
+  color: var(--accent-gold);
   font-weight: 700;
 }
 
@@ -1518,7 +1504,7 @@ select:focus-visible,
 }
 
 .consultation-link svg {
-  color: #c6f0ff;
+  color: var(--accent-gold);
 }
 
 .inquiry-section {
@@ -1681,7 +1667,7 @@ select:focus-visible,
   align-items: center;
   gap: 10px;
   margin-top: 22px;
-  color: #8bdcff;
+  color: var(--accent-gold);
   font-size: 10px;
   font-weight: 700;
 }
@@ -1839,14 +1825,6 @@ select:focus-visible,
   border-bottom: 1px solid rgb(255 255 255 / 16%);
 }
 
-.footer-wordmark .wordmark-symbol {
-  background: var(--ocean);
-}
-
-.footer-wordmark .wordmark-copy small {
-  color: #b6c8d8;
-}
-
 .footer-tagline {
   margin: 0 auto 0 30px;
   color: #d7e3ef;
@@ -1871,7 +1849,7 @@ select:focus-visible,
 
 .footer-links a:hover,
 .back-top:hover {
-  color: #7dd3fc;
+  color: var(--accent-gold);
 }
 
 .back-top {
@@ -1886,7 +1864,7 @@ select:focus-visible,
 }
 
 .back-top svg {
-  color: #7dd3fc;
+  color: var(--accent-gold);
 }
 
 .footer-bottom {
@@ -1901,7 +1879,7 @@ select:focus-visible,
 
 .footer-bottom > span:last-child span {
   padding-left: 5px;
-  color: #7dd3fc;
+  color: var(--accent-gold);
 }
 
 .whatsapp-float {
@@ -2161,9 +2139,10 @@ select:focus-visible,
     padding-left: 8vw;
   }
 
-  .hero-bus {
+  .hero-mascot {
     right: -10%;
-    width: 86vw;
+    bottom: 160px;
+    width: min(48vw, 400px);
   }
 
   .search-dock {
@@ -2340,17 +2319,18 @@ select:focus-visible,
     margin-top: 20px;
   }
 
-  .hero-bus {
-    right: -20%;
-    bottom: 292px;
-    width: 120vw;
+  .hero-mascot {
+    right: -2%;
+    bottom: 330px;
+    width: min(49vw, 220px);
   }
 
   .hero-caption {
     right: auto;
-    bottom: 257px;
+    bottom: 346px;
     left: 24px;
     gap: 9px;
+    color: #e5f2f7;
     font-size: 11px;
   }
 
@@ -2359,8 +2339,11 @@ select:focus-visible,
   }
 
   .hero-side-index {
-    top: 52%;
+    top: 84px;
     right: 14px;
+    padding: 5px 4px;
+    border-radius: 2px;
+    background: rgb(15 23 42 / 58%);
     font-size: 7px;
   }
 
