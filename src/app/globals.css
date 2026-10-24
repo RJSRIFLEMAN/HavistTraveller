@@ -309,7 +309,6 @@ select:focus-visible,
 .lead-copy h2 em {
   color: var(--accent-gold);
 }
-
 .hero-description {
   max-width: 405px;
   margin: 0;
